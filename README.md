@@ -293,6 +293,12 @@ Visit `http://localhost:8001` in your browser. The app should be up & running.
 
 <br />
 
+## Set up aws
+- Install docker cli `curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh`
+- Create AWS ECS docker context `docker context create ecs xtrump_context`
+- Choose `Select AWS Profile -> xtrump` with `xtrump` defined in `.aws/credentials`
+- Use xtrump_context `docker context use xtrump_context`
+
 ## Credits & Links
 
 - [Flask Framework](https://www.palletsprojects.com/p/flask/) - The offcial website

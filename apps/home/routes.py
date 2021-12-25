@@ -12,10 +12,10 @@ from jinja2 import TemplateNotFound
 @blueprint.route('/index')
 @login_required
 def index():
-
     return render_template('home/index.html', segment='index')
 
-@blueprint.route('/<template>')
+
+@blueprint.route('/home/<template>')
 @login_required
 def route_template(template):
 
@@ -36,6 +36,27 @@ def route_template(template):
     except:
         return render_template('home/page-500.html'), 500
 
+
+@blueprint.route('/games/<template>')
+# @login_required
+def games_template(template):
+
+    try:
+
+        if not template.endswith('.html'):
+            pass
+
+        # Detect the current page
+        segment = get_segment(request)
+
+        # Serve the file (if exists) from app/templates/home/FILE.html
+        return render_template("games/" + template, segment=segment)
+
+    except TemplateNotFound:
+        return render_template('home/page-404.html'), 404
+
+    except:
+        return render_template('home/page-500.html'), 500
 
 # Helper - Extract current page name from request
 def get_segment(request):
