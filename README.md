@@ -299,6 +299,20 @@ Visit `http://localhost:8001` in your browser. The app should be up & running.
 - Choose `Select AWS Profile -> xtrump` with `xtrump` defined in `.aws/credentials`
 - Use xtrump_context `docker context use xtrump_context`
 
+## Push image to ECR
+- Login: `aws --profile xtrump ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 789611227551.dkr.ecr.ap-southeast-2.amazonaws.com`
+- Build: `docker-compose build`
+- Tag: 
+`docker tag flask-black-dashboard_appseed-app:latest 789611227551.dkr.ecr.ap-southeast-2.amazonaws.com/xtrump:appseed_app`
+`docker tag nginx:latest 789611227551.dkr.ecr.ap-southeast-2.amazonaws.com/xtrump:nginx`
+- Push: 
+`docker push 789611227551.dkr.ecr.ap-southeast-2.amazonaws.com/xtrump:appseed_app`
+`docker push 789611227551.dkr.ecr.ap-southeast-2.amazonaws.com/xtrump:nginx`
+
+## Docker compose on EC2
+- SSH to EC2
+- Run ec2Bootstrap.bash
+
 ## Credits & Links
 
 - [Flask Framework](https://www.palletsprojects.com/p/flask/) - The offcial website

@@ -1,0 +1,28 @@
+#!/bin/bash
+sudo apt-get update
+
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+sudo chmod 666 /var/run/docker.sock
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+sudo apt install awscli -y
+aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 789611227551.dkr.ecr.ap-southeast-2.amazonaws.com
+docker pull 789611227551.dkr.ecr.ap-southeast-2.amazonaws.com/xtrump:nginx
+docker pull 789611227551.dkr.ecr.ap-southeast-2.amazonaws.com/xtrump:appseed_app
+
+mkdir "xtrump"
+cd xtrump
+aws s3 cp --recursive s3://xtrump-frontend/ .
+docker-compose up
