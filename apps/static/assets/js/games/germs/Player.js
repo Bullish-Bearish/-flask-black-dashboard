@@ -12,7 +12,7 @@ export default class Player extends Phaser.Physics.Arcade.Image
 
         this.isAlive = false;
 
-        this.speed = 280;
+        this.speed = 500;
         this.target = new Phaser.Math.Vector2();
     }
 

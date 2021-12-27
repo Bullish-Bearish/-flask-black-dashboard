@@ -37,7 +37,7 @@ export default class Germ extends Phaser.Physics.Arcade.Sprite
             onComplete: () => {
                 if (this.scene.player.isAlive)
                 {
-                    this.lifespan = Phaser.Math.RND.between(6000, 12000);
+                    this.lifespan = Phaser.Math.RND.between(3000, 6000);
                     this.isChasing = true;
                 }
             }

@@ -22,7 +22,7 @@ aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS
 docker pull 789611227551.dkr.ecr.ap-southeast-2.amazonaws.com/xtrump:nginx
 docker pull 789611227551.dkr.ecr.ap-southeast-2.amazonaws.com/xtrump:appseed_app
 
-mkdir "xtrump"
+mkdir xtrump
 cd xtrump
 aws s3 cp --recursive s3://xtrump-frontend/ .
 docker-compose up

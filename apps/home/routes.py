@@ -4,7 +4,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from apps.home import blueprint
-from flask import render_template, request
+from flask import render_template, request, redirect
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 
@@ -37,26 +37,10 @@ def route_template(template):
         return render_template('home/page-500.html'), 500
 
 
-@blueprint.route('/games/<template>')
-# @login_required
-def games_template(template):
+@blueprint.route('/whitepaper')
+def whitepaper_reroute():
+    return redirect("https://realxtrump.gitbook.io/whitepaper/", code=302)
 
-    try:
-
-        if not template.endswith('.html'):
-            pass
-
-        # Detect the current page
-        segment = get_segment(request)
-
-        # Serve the file (if exists) from app/templates/home/FILE.html
-        return render_template("games/" + template, segment=segment)
-
-    except TemplateNotFound:
-        return render_template('home/page-404.html'), 404
-
-    except:
-        return render_template('home/page-500.html'), 500
 
 # Helper - Extract current page name from request
 def get_segment(request):

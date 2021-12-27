@@ -9,18 +9,10 @@ from flask_login import login_required
 from jinja2 import TemplateNotFound
 
 
-@blueprint.route('/index')
-@login_required
-def index():
-    return render_template('games/germs.html', segment='index')
-
-
-@blueprint.route('/games/<template>')
+@blueprint.route('/<template>')
 # @login_required
 def games_template(template):
-
     try:
-
         if not template.endswith('.html'):
             pass
 
@@ -36,9 +28,9 @@ def games_template(template):
     except:
         return render_template('home/page-500.html'), 500
 
+
 # Helper - Extract current page name from request
 def get_segment(request):
-
     try:
 
         segment = request.path.split('/')[-1]

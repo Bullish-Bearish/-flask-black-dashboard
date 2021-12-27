@@ -6,8 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 from flask import Blueprint
 
 blueprint = Blueprint(
-    'games_blueprint',
+    'highscores_blueprint',
     __name__,
-    url_prefix='/games',
-    static_folder='static'
+    url_prefix='/highscores'
 )
